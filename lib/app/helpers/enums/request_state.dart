@@ -1,0 +1,1 @@
+enum RequestState { default_, waiting, succesfull, unsuccesfull }

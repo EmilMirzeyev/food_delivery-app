@@ -1,0 +1,1 @@
+enum BuildPermission {wait, can, cannot}
