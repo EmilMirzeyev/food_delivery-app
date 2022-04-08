@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/ui/screens/auth/auth_screen.dart';
-import '../../ui/screens/home_screen.dart';
+import '../../ui/screens/home/home_screen.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

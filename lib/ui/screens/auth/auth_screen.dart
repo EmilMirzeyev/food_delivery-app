@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/ui/utils/constraints/ui_constraints.dart';
+import 'package:flutter_application_1/ui/view_models/concrency/auth_viewmodel.dart';
+import '/ui/screens/auth/components/sign_in_widget.dart';
+import '/ui/utils/constraints/ui_constraints.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -10,6 +12,15 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  late AuthViewModel _authViewModel;
+  @override
+  void initState() {
+    _authViewModel = AuthViewModel();
+    _authViewModel.updateUi = setState;
+    _authViewModel.initialize();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
@@ -26,24 +37,7 @@ class _AuthScreenState extends State<AuthScreen> {
               end: Alignment.bottomCenter,
             )),
           ),
-          Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'SIGN IN',
-                  style: UiConstraints.instance.px24w600k255,
-                ),
-                const Text('Complete this step for best adjustment.'),
-                Container(
-                  color: UiConstraints.instance.kfff,
-                  child: Form(
-                    child: Column(children: const []),
-                  ),
-                )
-              ],
-            ),
-          ),
+          SignInWidget(authViewModel: _authViewModel),
         ],
       ),
     );

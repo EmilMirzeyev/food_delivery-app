@@ -9,6 +9,7 @@ class UiConstraints {
   //COLOR
   Color get k3a4f66 => const Color(0xff3a4f66);
   Color get kff2c2b => const Color(0xffff2c2b);
+  Color get k4167b0 => const Color(0xff4167b0);
   Color get kfe734c => const Color(0xfffe734c);
   Color get kfff => const Color(0xffffffff);
   Color get kccddff => const Color(0xffccddff);
@@ -17,5 +18,10 @@ class UiConstraints {
   Color get k150_187_124 => const Color.fromRGBO(150, 187, 124, 1);
 
   //TEXTSTYLES
-  TextStyle get px24w600k255 => const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Color(0xff3a4f66));
+  TextStyle get px24w600k3a4f66 => const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Color(0xff3a4f66));
+  TextStyle get px12w400kc4c4c4 => const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xffc4c4c4));
+  TextStyle get px12w600k3a4f66 => const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xff3a4f66));
+  TextStyle get px12w600kfe734c => const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xfffe734c));
+  TextStyle get px14w600k3a4f66 => const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xff3a4f66));
+  TextStyle get px12w400k171718 => const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xff171718));
 }
