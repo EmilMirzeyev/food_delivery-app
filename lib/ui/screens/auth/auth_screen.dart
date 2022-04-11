@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/ui/view_models/concrency/auth_viewmodel.dart';
+import 'package:food_delivery_app/app/helpers/enums/auth_page_type.dart';
+import 'package:food_delivery_app/ui/screens/auth/components/forgot_password_widget.dart';
 import '/ui/screens/auth/components/sign_in_widget.dart';
+import '/ui/screens/auth/components/sign_up_widget.dart';
+import '/ui/view_models/concrency/auth_viewmodel.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -37,7 +40,9 @@ class _AuthScreenState extends State<AuthScreen> {
               end: Alignment.bottomCenter,
             )),
           ),
-          SignInWidget(authViewModel: _authViewModel),
+          if (_authViewModel.authPageType == AuthPageType.signin) SignInWidget(authViewModel: _authViewModel),
+          if (_authViewModel.authPageType == AuthPageType.signup) SignUpWidget(authViewModel: _authViewModel),
+          if (_authViewModel.authPageType == AuthPageType.forgotpassword) ForgotPasswordWidget(authViewModel: _authViewModel),
         ],
       ),
     );

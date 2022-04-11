@@ -3,12 +3,58 @@ class KeyConstraints {
   static KeyConstraints? _instance;
   KeyConstraints._();
   Map<WordMapKeys, String> get wordKeys => {
-    WordMapKeys.hello: 'hello',
-    WordMapKeys.order: 'order',
-  };
+        WordMapKeys.signin: 'signin',
+        WordMapKeys.signup: 'signup',
+        WordMapKeys.forgotpassword: 'forgotpassword',
+        WordMapKeys.stepperguide: 'stepperguide',
+        WordMapKeys.forgotpasswordguide: 'forgotpasswordguide',
+        WordMapKeys.youremail: 'youremail',
+        WordMapKeys.email: 'email',
+        WordMapKeys.password: 'password',
+        WordMapKeys.rememberme: 'rememberme',
+        WordMapKeys.forgotpassword2: 'forgotpassword2',
+        WordMapKeys.signinviafb: 'signinviafb',
+        WordMapKeys.donthaveacc: 'donthaveacc',
+        WordMapKeys.signup2: 'signup2',
+        WordMapKeys.mobile: 'mobile',
+        WordMapKeys.acceptterms: 'acceptterms',
+        WordMapKeys.phonerequired: 'phonerequired',
+        WordMapKeys.phoneincorrectformat: 'phoneincorrectformat',
+        WordMapKeys.sendnow: 'sendnow',
+        WordMapKeys.back: 'back',
+        WordMapKeys.havingproblem: 'havingproblem',
+        WordMapKeys.needhelp: 'needhelp',
+        WordMapKeys.haveacc: 'haveacc',
+        WordMapKeys.signin2: 'signin2',
+        WordMapKeys.emailrequired: 'emailrequired',
+        WordMapKeys.emailincorrectformat: 'emailincorrectformat',
+      };
 }
 
 enum WordMapKeys {
-  hello,
-  order
+  signin,
+  signup,
+  forgotpassword,
+  stepperguide,
+  forgotpasswordguide,
+  youremail,
+  email,
+  password,
+  rememberme,
+  forgotpassword2,
+  signinviafb,
+  donthaveacc,
+  signup2,
+  mobile,
+  acceptterms,
+  phonerequired,
+  phoneincorrectformat,
+  sendnow,
+  back,
+  havingproblem,
+  needhelp,
+  haveacc,
+  signin2,
+  emailrequired,
+emailincorrectformat
 }

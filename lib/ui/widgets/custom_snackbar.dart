@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '/app/helpers/enums/snackbar_type_enum.dart';
+import 'package:food_delivery_app/ui/utils/constraints/ui_constraints.dart';
+import '../../app/helpers/enums/snackbar_type.dart';
 import '/ui/utils/constraints/ui_media.dart';
 
 class CustomSnackbar extends StatelessWidget {
@@ -12,6 +13,7 @@ class CustomSnackbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: UiConstraints.instance.k3a4f66,
       padding: const EdgeInsets.symmetric(vertical: 17.0, horizontal: 17.0),
       child: type == SnackbarType.success
           ? Row(

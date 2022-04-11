@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/app/helpers/enums/auth_page_type.dart';
+import 'package:food_delivery_app/app/helpers/enums/snackbar_type.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
 import '/ui/view_models/concrency/auth_viewmodel.dart';
+import 'package:food_delivery_app/ui/utils/constraints/ui_constraints.dart';
 
-final _signInKey = GlobalKey<FormState>();
+final _signUpKey = GlobalKey<FormState>();
 
-class SignInWidget extends StatelessWidget {
-  const SignInWidget({
+class SignUpWidget extends StatelessWidget {
+  const SignUpWidget({
     Key? key,
     required this.authViewModel,
   }) : super(key: key);
@@ -15,10 +18,11 @@ class SignInWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final phoneMaskFormatter = MaskTextInputFormatter(mask: '+994 (##) ###-##-##');
     return SingleChildScrollView(
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
@@ -27,7 +31,7 @@ class SignInWidget extends StatelessWidget {
                 height: 32.0,
               ),
               Text(
-                authViewModel.signinTranslate,
+                authViewModel.signupTranslate,
                 style: UiConstraints.instance.px24w600k3a4f66,
               ),
               const SizedBox(height: 8.0),
@@ -46,7 +50,7 @@ class SignInWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16.0),
                 ),
                 child: Form(
-                  key: _signInKey,
+                  key: _signUpKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -100,50 +104,84 @@ class SignInWidget extends StatelessWidget {
                           ),
                         ),
                       ),
+                      const SizedBox(
+                        height: 32.0,
+                      ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                          authViewModel.mobileTranslate,
+                          style: UiConstraints.instance.px14w600k3a4f66,
+                        ),
+                      ),
+                      TextFormField(
+                        keyboardType: TextInputType.phone,
+                        cursorColor: UiConstraints.instance.k3a4f66,
+                        inputFormatters: [phoneMaskFormatter],
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          filled: true,
+                          fillColor: UiConstraints.instance.kf8f8f8,
+                          hintText: '+994(55) 555-55-55',
+                          hintStyle: UiConstraints.instance.px14w400ka6a6a6,
+                          prefixIcon: Icon(Icons.phone, color: UiConstraints.instance.kfe734c),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: UiConstraints.instance.kff2c2b),
+                            borderRadius: UiConstraints.instance.borderRadius,
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: UiConstraints.instance.kff2c2b),
+                            borderRadius: UiConstraints.instance.borderRadius,
+                          ),
+                          errorStyle: UiConstraints.instance.px12w400kff2c2b,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return authViewModel.phonerequiredTranslate;
+                          }
+
+                          if (value.replaceAll(' ', '').length < 17) {
+                            return authViewModel.phoneincorrectformatTranslate;
+                          }
+                          return null;
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0, bottom: 28.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                InkWell(
-                                  onTap: () => authViewModel.changeRememberme(),
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 150),
-                                    width: 35.0,
-                                    height: 16.0,
-                                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      color: authViewModel.rememberme ? UiConstraints.instance.kfe734c : UiConstraints.instance.kc4c4c4,
-                                    ),
-                                    child: AnimatedAlign(
-                                      alignment: authViewModel.rememberme ? Alignment.centerRight : Alignment.centerLeft,
-                                      duration: const Duration(milliseconds: 150),
-                                      child: CircleAvatar(
-                                        backgroundColor: UiConstraints.instance.kfff,
-                                        radius: 6.0,
-                                      ),
-                                    ),
+                            InkWell(
+                              onTap: () => authViewModel.changeRememberme(),
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 150),
+                                width: 35.0,
+                                height: 16.0,
+                                padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  color: authViewModel.rememberme ? UiConstraints.instance.kfe734c : UiConstraints.instance.kc4c4c4,
+                                ),
+                                child: AnimatedAlign(
+                                  alignment: authViewModel.rememberme ? Alignment.centerRight : Alignment.centerLeft,
+                                  duration: const Duration(milliseconds: 150),
+                                  child: CircleAvatar(
+                                    backgroundColor: UiConstraints.instance.kfff,
+                                    radius: 6.0,
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 8.0,
-                                ),
-                                Text(
-                                  authViewModel.remembermeTranslate,
-                                  style: UiConstraints.instance.px12w400kc4c4c4,
-                                )
-                              ],
-                            ),
-                            TextButton(
-                              onPressed: () => authViewModel.changePage(AuthPageType.forgotpassword),
-                              child: Text(
-                                authViewModel.forgotpassword2Translate,
-                                style: UiConstraints.instance.px12w400k171718,
                               ),
                             ),
+                            const SizedBox(
+                              width: 8.0,
+                            ),
+                            Text(
+                              authViewModel.accepttermsTranslate,
+                              style: UiConstraints.instance.px12w400kc4c4c4,
+                            )
                           ],
                         ),
                       ),
@@ -156,11 +194,13 @@ class SignInWidget extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          if (_signInKey.currentState!.validate()) {
-                            authViewModel.showSnackBar(content: "Register ok!!");
+                          if (_signUpKey.currentState!.validate()) {
+                            authViewModel.showSnackBar(content: "Register ok!!", type: SnackbarType.success);
+                          } else {
+                            authViewModel.showSnackBar(content: "Register false!!", type: SnackbarType.error);
                           }
                         },
-                        child: Text(authViewModel.signinTranslate),
+                        child: Text(authViewModel.signupTranslate),
                       ),
                     ],
                   ),
@@ -182,13 +222,13 @@ class SignInWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    authViewModel.donthaveaccTranslate,
+                    authViewModel.haveaccTranslate,
                     style: UiConstraints.instance.px12w600k3a4f66,
                   ),
                   TextButton(
-                    onPressed: () => authViewModel.changePage(AuthPageType.signup),
+                    onPressed: () => authViewModel.changePage(AuthPageType.signin),
                     child: Text(
-                      authViewModel.signup2Translate,
+                      authViewModel.signin2Translate,
                       style: UiConstraints.instance.px12w600kfe734c,
                     ),
                   )

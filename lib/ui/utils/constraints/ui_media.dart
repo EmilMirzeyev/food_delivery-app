@@ -5,6 +5,7 @@ class UiMedia {
   //IMAGES
   String get wishlistEmptyPath => 'assets/images/wishlist_empty.png';
   String get basketEmptyPath => 'assets/images/empty_basket.png';
+  String get profilePath => 'assets/images/profile.jpg';
 
   //VECTORS
   String get xPath => 'assets/vectors/x.svg';

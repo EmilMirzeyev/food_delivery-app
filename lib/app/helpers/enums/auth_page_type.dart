@@ -1,0 +1,1 @@
+enum AuthPageType {signin, signup, forgotpassword}
