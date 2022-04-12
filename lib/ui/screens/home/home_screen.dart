@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/ui/utils/constraints/ui_constraints.dart';
 import 'package:food_delivery_app/ui/utils/constraints/ui_media.dart';
+import 'package:food_delivery_app/ui/view_models/concrency/home_viewmodel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,8 +12,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final List<String> testArray = ['qunduz', 'sincab', 'kentozavr'];
+  late HomeViewModel _homeViewModel;
   @override
   void initState() {
+    _homeViewModel = HomeViewModel();
+    _homeViewModel.updateUi = setState;
+    _homeViewModel.initialize();
     super.initState();
   }
 
@@ -134,8 +140,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(
-                height: 12.0,
+                height: 24.0,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Nearby Place',
+                    style: UiConstraints.instance.px14w600k171718,
+                  ),
+                  Text(
+                    'See All (12)',
+                    style: UiConstraints.instance.px12w600kfe734c,
+                  ),
+                ],
+              ),
+              ..._homeViewModel.restaurants.map((e) => Text(
+                    e.title,
+                    style: UiConstraints.instance.px12w600kfe734c,
+                  )),
             ],
           ),
         ),

@@ -1,15 +1,17 @@
+import 'package:food_delivery_app/data/network/concrency/restaurants_network_manager.dart';
+
 import '/app/localization/abstraction/i_localizator.dart';
 import '/app/localization/concrency/app_localizator.dart';
 import '/app/routing/abstraction/i_router.dart';
 import '/app/routing/concrency/router.dart';
-import '/data/network/abstraction/i_products_network_manager.dart';
+import '../../data/network/abstraction/i_restaurants_network_manager.dart';
 import '/data/unit-of-work/abstraction/i_unit_of_work.dart';
 import '/data/unit-of-work/concrency/shared_preferences/shared_preferences_unit_of_work.dart';
 import '/ui/utils/constraints/key_constraints.dart';
 
 class AppDiContainer {
   late IRouter appRouter;
-  late IProductsNetworkManager productsNetworkManager;
+  late IRestaurantsNetworkManager restaurantsNetworkManager;
   late ILocalizator _appLocalizator;
   ILocalizator get appLocalizator => _appLocalizator;
 
@@ -19,7 +21,7 @@ class AppDiContainer {
   static AppDiContainer? _instance;
   AppDiContainer._() {
     appRouter = Router();
-    // productsNetworkManager = FakestoreProductsNetworkManager();
+    restaurantsNetworkManager = RestaurantsNetworkManager();
     _appLocalizator = AppLocalizator();
 
     unitOfWork = SharedPreferencesUnitOfWork();

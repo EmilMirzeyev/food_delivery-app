@@ -1,3 +1,4 @@
+import 'package:food_delivery_app/data/dtos/food_dto.dart';
 
 class BaseDto {
   late dynamic id;
@@ -14,21 +15,21 @@ class Rating {
   });
 }
 
-class ProductDto extends BaseDto {
+class RestaurantDto extends BaseDto {
   final String title;
   final String description;
-  final String category;
-  final dynamic price;
-  final String image;
+  final String location;
+  final String imageUrl;
   final Rating rating;
+  final List<FoodDto> foods;
 
-  ProductDto({
+  RestaurantDto({
     required this.title,
     required this.description,
-    required this.category,
-    required this.price,
-    required this.image,
+    required this.location,
+    required this.imageUrl,
     required this.rating,
+    required this.foods,
     dynamic id,
   }) : super(id: id);
 }
