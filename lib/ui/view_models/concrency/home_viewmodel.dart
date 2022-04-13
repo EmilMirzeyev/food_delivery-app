@@ -6,6 +6,7 @@ import 'package:food_delivery_app/ui/view_models/abstraction/i_base_viewmodel.da
 
 class HomeViewModel extends BaseViewModel {
   List<RestaurantModel> restaurants = [];
+  List<RestaurantModel> nearestRestaurants = [];
   late RequestState getProductsRequestState;
   late IBaseCommand getRestaurantsCommand;
   @override

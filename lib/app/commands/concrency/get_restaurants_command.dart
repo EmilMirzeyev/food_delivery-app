@@ -26,6 +26,7 @@ class GetRestaurantsCommand extends IBaseCommand {
 
       final _products = await restaurantsService.getRestaurants();
       _homeViewModel.restaurants.addAll(_products);
+      _homeViewModel.nearestRestaurants = _homeViewModel.restaurants.sublist(0, 3);
       _homeViewModel.getProductsRequestState = RequestState.succesfull;
     } catch (e) {
       _homeViewModel.getProductsRequestState = RequestState.unsuccesfull;

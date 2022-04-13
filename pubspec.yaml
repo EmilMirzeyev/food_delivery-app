@@ -39,6 +39,7 @@ dependencies:
   page_transition: ^2.0.5
   flutter_svg: ^1.0.3
   mask_text_input_formatter: ^2.3.0
+  flutter_rating_bar: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,8 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/restaurants/
+    - assets/images/foods/
     - assets/vectors/
     - assets/localization/
 
