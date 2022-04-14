@@ -32,7 +32,7 @@ class RestaurantsNetworkManager extends IFoodDeliveryRestaurantsNetworkManager {
             title: "Beef Wellington",
             recipe: "Beef, mushrooms, flour, eggs, butter",
             price: 48.25,
-            imageUrl: "assets/images/foods/sezar.jpg",
+            imageUrl: "assets/images/foods/beef-wellington.jpg",
             category: "Meat",
             rating: Rating(
               rate: 3.2,
@@ -76,7 +76,8 @@ class RestaurantsNetworkManager extends IFoodDeliveryRestaurantsNetworkManager {
           ),
           FoodDto(
             title: "Salisbury Steak",
-            recipe: "Melted butter, tomato paste, mushrooms, onions, beef, crispy bread, milk, soy sauce",
+            recipe:
+                "Melted butter, tomato paste, mushrooms, onions, beef, crispy bread, milk, soy sauce",
             price: 125.72,
             imageUrl: "assets/images/foods/salisbury_steak.webp",
             category: "Meat",
@@ -122,7 +123,8 @@ class RestaurantsNetworkManager extends IFoodDeliveryRestaurantsNetworkManager {
           ),
           FoodDto(
             title: "Lobster Newburg",
-            recipe: "Lobster chunks, seafood, tarragon leaves, butter, pepper and salt",
+            recipe:
+                "Lobster chunks, seafood, tarragon leaves, butter, pepper and salt",
             price: 60.00,
             imageUrl: "assets/images/foods/lobster_newburg.webp",
             category: "Salads",

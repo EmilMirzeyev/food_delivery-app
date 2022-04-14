@@ -1,7 +1,5 @@
-import 'package:food_delivery_app/data/dtos/food_dto.dart';
-import 'package:food_delivery_app/data/models/food_model.dart';
-
-import '../dtos/restaurant_dto.dart';
+import '/data/dtos/restaurant_dto.dart';
+import '/data/models/food_model.dart';
 import '/data/models/base_model.dart';
 
 class RestaurantModel extends BaseModel {
