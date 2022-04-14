@@ -15,4 +15,7 @@ class UiMedia {
   String get trashPath => 'assets/vectors/trash.svg';
   String get minusPath => 'assets/vectors/minus.svg';
   String get plusPath => 'assets/vectors/plus.svg';
+  String get filtersPath => 'assets/vectors/filters.svg';
+  String get shoppingPath => 'assets/vectors/shopping.svg';
+  String get homePath => 'assets/vectors/home.svg';
 }
