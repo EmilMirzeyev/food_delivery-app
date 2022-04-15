@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/ui/pages/home/home_page.dart';
+import 'package:food_delivery_app/ui/screens/layout.dart';
 import '/ui/screens/auth/auth_screen.dart';
-import '../../ui/screens/home/home_screen.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -42,10 +43,11 @@ class FoodDeliveryApp extends StatelessWidget {
         return ScrollConfiguration(behavior: const ScrollBehaviorModified(), child: widget!);
       },
       routes: {
-        HomeScreen.route: (_) => const HomeScreen(),
+        HomePage.route: (_) => const HomePage(),
         AuthScreen.route: (_) => const AuthScreen(),
+        Layout.route: (_) => const Layout(),
       },
-      initialRoute: HomeScreen.route,
+      initialRoute: Layout.route,
     );
   }
 }

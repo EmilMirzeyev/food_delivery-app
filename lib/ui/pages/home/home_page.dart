@@ -1,0 +1,191 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '/ui/pages/home/components/home_food_search_widget.dart';
+import '/ui/pages/home/components/popular_restaurants_widget.dart';
+import '/ui/utils/constraints/ui_constraints.dart';
+import '/ui/utils/constraints/ui_media.dart';
+import '/ui/view_models/concrency/home_viewmodel.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+  static const route = '/home-page';
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late HomeViewModel _homeViewModel;
+  @override
+  void initState() {
+    _homeViewModel = HomeViewModel();
+    _homeViewModel.updateUi = setState;
+    _homeViewModel.initialize();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
+    return SingleChildScrollView(
+      child: Container(
+        color: UiConstraints.instance.kfff,
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Text(
+                'Welcome Foody',
+                style: UiConstraints.instance.px24w600k171718,
+              ),
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            Container(
+              width: _size.width,
+              height: 42.0,
+              decoration: BoxDecoration(
+                color: UiConstraints.instance.kf8f8f8,
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () => showSearch(context: context, delegate: HomeFoodSearch(_homeViewModel)),
+                      child: SizedBox(
+                        height: 42.0,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Icon(
+                                Icons.search,
+                                color: UiConstraints.instance.kc4c4c4,
+                              ),
+                            ),
+                            Text(
+                              'Find Your Food',
+                              style: UiConstraints.instance.px14w400kc4c4c4,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () => showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) => buildSheet(),
+                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 8.0),
+                        child: SvgPicture.asset(
+                          UiMedia.instance.filtersPath,
+                          color: UiConstraints.instance.kfe734c,
+                          width: 24.0,
+                        )),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 24.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Nearby Place',
+                  style: UiConstraints.instance.px18w600k171718,
+                ),
+                Text(
+                  'See All (12)',
+                  style: UiConstraints.instance.px12w600kfe734c,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            Wrap(
+              runSpacing: 14.0,
+              children: [
+                ..._homeViewModel.nearestRestaurants.map(
+                  (e) => Container(
+                    width: _size.width,
+                    height: 80.0,
+                    padding: const EdgeInsets.all(6.0),
+                    decoration: BoxDecoration(
+                      color: UiConstraints.instance.kf8f8f8,
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: Row(
+                      children: [
+                        AspectRatio(
+                          aspectRatio: 1,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0),
+                            child: Image.asset(
+                              e.imageUrl,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 16.0,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(e.title),
+                            const SizedBox(
+                              height: 4.0,
+                            ),
+                            Text(e.location),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 24.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Popular Restaurants',
+                  style: UiConstraints.instance.px18w600k171718,
+                ),
+                Text(
+                  'See All (12)',
+                  style: UiConstraints.instance.px12w600kfe734c,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            PopularRestaurantsWidget(viewModel: _homeViewModel),
+            const SizedBox(
+              height: 100.0,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildSheet() => Container();
+}

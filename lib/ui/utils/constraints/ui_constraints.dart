@@ -28,6 +28,7 @@ class UiConstraints {
   TextStyle get px12w400kff2c2b => const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xffff2c2b));
   TextStyle get px14w600k3a4f66 => const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xff3a4f66));
   TextStyle get px14w600k617282 => const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xff617282));
+  TextStyle get px11w500k617282 => const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Color(0xff617282));
   TextStyle get px14w600kffffff => const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xffffffff));
   TextStyle get px14w600kfe734c => const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xfffe734c));
   TextStyle get px14w400ka6a6a6 => const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xffa6a6a6));
