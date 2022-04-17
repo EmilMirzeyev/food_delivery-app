@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/ui/pages/home/home_page.dart';
-import 'package:food_delivery_app/ui/screens/layout.dart';
+import 'package:food_delivery_app/ui/screens/main/main_screen.dart';
 import '/ui/screens/auth/auth_screen.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 class ScrollBehaviorModified extends ScrollBehavior {
   const ScrollBehaviorModified();
@@ -40,14 +41,15 @@ class FoodDeliveryApp extends StatelessWidget {
         appBarTheme: AppBarTheme(backgroundColor: UiConstraints.instance.kfff),
       ),
       builder: (context, widget) {
-        return ScrollConfiguration(behavior: const ScrollBehaviorModified(), child: widget!);
+        return ScrollConfiguration(
+            behavior: const ScrollBehaviorModified(), child: widget!);
       },
       routes: {
         HomePage.route: (_) => const HomePage(),
         AuthScreen.route: (_) => const AuthScreen(),
-        Layout.route: (_) => const Layout(),
+        MainScreen.route: (_) => const MainScreen(),
       },
-      initialRoute: Layout.route,
+      initialRoute: MainScreen.route,
     );
   }
 }
