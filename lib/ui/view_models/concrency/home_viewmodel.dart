@@ -1,3 +1,5 @@
+import 'package:food_delivery_app/app/commands/concrency/go_to_restaurants_screen_command.dart';
+
 import '/app/commands/abstraction/i_base_command.dart';
 import '/app/commands/concrency/get_restaurants_command.dart';
 import '/app/helpers/enums/request_state.dart';
@@ -10,31 +12,14 @@ class HomeViewModel extends BaseViewModel {
 
   late RequestState getProductsRequestState;
   late IBaseCommand getRestaurantsCommand;
-
-  // void searchInit(query) {
-  //   if (allRestaurantList.isEmpty) {
-  //     for (var restaurant in restaurants) {
-  //       if (restaurant.title.toLowerCase().contains(query.toLowerCase())) {
-  //         restaurantList.add(restaurant);
-  //       }
-  //       for (var meal in restaurant.foods) {
-  //         if (meal.title.toLowerCase().contains(query.toLowerCase())) {
-  //           mealList.add(meal);
-  //         }
-  //       }
-  //     }
-  //     allRestaurants == true
-  //         ? allRestaurantList = restaurantList
-  //         : allRestaurantList = restaurantList.sublist(0, 3);
-  //     listQuery = [...restaurantList, ...mealList];
-  //   }
-  // }
+  late IBaseCommand goToRestaurantsScreenCommand;
 
   @override
   void initialize() {
     getProductsRequestState = RequestState.default_;
     getRestaurantsCommand = GetRestaurantsCommand();
     getRestaurantsCommand.doExecute({"vm": this});
+    goToRestaurantsScreenCommand = GoToRestaurantsScreenCommand();
   }
 
   HomeViewModel({UpdateUi? updateUi}) : super(updateUi: updateUi);

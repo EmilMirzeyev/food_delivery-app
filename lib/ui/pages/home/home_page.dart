@@ -104,9 +104,12 @@ class _HomePageState extends State<HomePage> {
                   'Nearby Place',
                   style: UiConstraints.instance.px18w600k171718,
                 ),
-                Text(
-                  'See All (12)',
-                  style: UiConstraints.instance.px12w600kfe734c,
+                TextButton(
+                  onPressed: () => _homeViewModel.goToRestaurantsScreenCommand.doExecute({}),
+                  child: Text(
+                    'See All (12)',
+                    style: UiConstraints.instance.px12w600kfe734c,
+                  ),
                 ),
               ],
             ),

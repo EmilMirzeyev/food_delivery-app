@@ -70,19 +70,18 @@ class HomeFoodSearch extends SearchDelegate {
 
     void toggleRestaurant() {
       allRestaurants = !allRestaurants;
-      allRestaurants == true
-          ? allRestaurantList = restaurantList
-          : allRestaurantList = restaurantList.sublist(0, 3);
+      allRestaurants == true ? allRestaurantList = restaurantList : allRestaurantList = restaurantList.sublist(0, 3);
     }
 
     listQuery = [...restaurantList, ...mealList];
 
     return StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
-      return Container(
+      builder: (BuildContext context, StateSetter setState) {
+        return Container(
           color: UiConstraints.instance.kfff,
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -115,8 +114,7 @@ class HomeFoodSearch extends SearchDelegate {
                                     width: 16.0,
                                   ),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(result.title),
@@ -135,12 +133,31 @@ class HomeFoodSearch extends SearchDelegate {
                   ),
                 ),
                 restaurantList.length > 3
-                    ? ElevatedButton(
-                        onPressed: () => setState(() => toggleRestaurant()),
-                        style: ElevatedButton.styleFrom(
-                          primary: allRestaurants ? Colors.amber : Colors.red,
+                    ? Padding(
+                        padding: const EdgeInsets.only(bottom: 32.0),
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: _size.width,
+                              height: 1.0,
+                              color: UiConstraints.instance.kc4c4c4,
+                              margin: const EdgeInsets.only(top: 21.0),
+                            ),
+                            Center(
+                              child: SizedBox(
+                                height: 42.0,
+                                child: ElevatedButton(
+                                  onPressed: () => setState(() => toggleRestaurant()),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: allRestaurants ? Colors.amber : Colors.red,
+                                    shape: const StadiumBorder(),
+                                  ),
+                                  child: Text(allRestaurants ? "Show Less" : "Show More"),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: const Text('Load More'),
                       )
                     : const SizedBox(),
                 Padding(
@@ -149,224 +166,165 @@ class HomeFoodSearch extends SearchDelegate {
                     alignment: WrapAlignment.start,
                     children: [
                       ...mealList
-                          .map(
-                            (result) => listQuery.isNotEmpty
-                                ? InkWell(
-                                    child: SizedBox(
-                                      width: _size.width * 0.5 - 8.0,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
-                                            color: UiConstraints.instance.kfff,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: UiConstraints
-                                                    .instance.k3a4f66
-                                                    .withOpacity(0.3),
-                                                offset: const Offset(2, 0),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 2.0,
-                                              ),
-                                            ],
+                          .map((result) => InkWell(
+                                child: SizedBox(
+                                  width: _size.width * 0.5 - 8.0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12.0),
+                                        color: UiConstraints.instance.kfff,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: UiConstraints.instance.k3a4f66.withOpacity(0.3),
+                                            offset: const Offset(2, 0),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 2.0,
                                           ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                        ],
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        children: [
+                                          Stack(
+                                            clipBehavior: Clip.none,
                                             children: [
-                                              Stack(
-                                                clipBehavior: Clip.none,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12.0),
-                                                    child: AspectRatio(
-                                                      aspectRatio: 1,
-                                                      child: Image.asset(
-                                                        result.imageUrl,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
+                                              ClipRRect(
+                                                borderRadius: BorderRadius.circular(12.0),
+                                                child: AspectRatio(
+                                                  aspectRatio: 1,
+                                                  child: Image.asset(
+                                                    result.imageUrl,
+                                                    fit: BoxFit.cover,
                                                   ),
-                                                  Positioned(
-                                                    top: 8.0,
-                                                    left: 8.0,
-                                                    child: Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      decoration: BoxDecoration(
-                                                        color: UiConstraints
-                                                            .instance.kfff,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(9999),
-                                                      ),
-                                                      child: Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Text(
-                                                            '₼',
-                                                            style: UiConstraints
-                                                                .instance
-                                                                .px12w600kfe734c,
-                                                          ),
-                                                          Text(
-                                                            result.price
-                                                                .toStringAsFixed(
-                                                                    2),
-                                                            style: UiConstraints
-                                                                .instance
-                                                                .px18w600k171718,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    bottom: -15.0,
-                                                    left: 8.0,
-                                                    child: Container(
-                                                      height: 30.0,
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      decoration: BoxDecoration(
-                                                        color: UiConstraints
-                                                            .instance.kfff,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(9999),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: UiConstraints
-                                                                .instance
-                                                                .kfe734c
-                                                                .withOpacity(
-                                                                    0.1),
-                                                            offset:
-                                                                const Offset(
-                                                                    0, 5),
-                                                            blurRadius: 6.0,
-                                                            spreadRadius: 2.0,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      child: Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Wrap(
-                                                          direction:
-                                                              Axis.horizontal,
-                                                          crossAxisAlignment:
-                                                              WrapCrossAlignment
-                                                                  .center,
-                                                          spacing: 2.0,
-                                                          children: [
-                                                            Text(
-                                                                result
-                                                                    .rating.rate
-                                                                    .toStringAsFixed(
-                                                                        1),
-                                                                style: UiConstraints
-                                                                    .instance
-                                                                    .px13w500k171718),
-                                                            const Icon(
-                                                              Icons.star,
-                                                              size: 12.0,
-                                                              color:
-                                                                  Colors.amber,
-                                                            ),
-                                                            Text(
-                                                              '(${result.rating.count})',
-                                                              style: UiConstraints
-                                                                  .instance
-                                                                  .px12w400kc4c4c4,
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(
-                                                height: 20.0,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      result.title,
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style: UiConstraints
-                                                          .instance
-                                                          .px18w600k171718
-                                                          .copyWith(
-                                                        fontSize: 16.0,
-                                                        overflow:
-                                                            TextOverflow.fade,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      result.recipe,
-                                                      maxLines: 2,
-                                                      style: UiConstraints
-                                                          .instance
-                                                          .px12w600k3a4f66
-                                                          .copyWith(
-                                                        overflow:
-                                                            TextOverflow.fade,
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 4.0,
-                                                    ),
-                                                    ElevatedButton(
-                                                      onPressed: () {},
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        primary: UiConstraints
-                                                            .instance.kfe734c,
-                                                        shape:
-                                                            const StadiumBorder(),
-                                                      ),
-                                                      child: const Text('Add'),
-                                                    ),
-                                                  ],
                                                 ),
-                                              )
+                                              ),
+                                              Positioned(
+                                                top: 8.0,
+                                                left: 8.0,
+                                                child: Container(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  decoration: BoxDecoration(
+                                                    color: UiConstraints.instance.kfff,
+                                                    borderRadius: BorderRadius.circular(9999),
+                                                  ),
+                                                  child: Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                                    children: [
+                                                      Text(
+                                                        '₼',
+                                                        style: UiConstraints.instance.px12w600kfe734c,
+                                                      ),
+                                                      Text(
+                                                        result.price.toStringAsFixed(2),
+                                                        style: UiConstraints.instance.px18w600k171718,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                bottom: -15.0,
+                                                left: 8.0,
+                                                child: Container(
+                                                  height: 30.0,
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  decoration: BoxDecoration(
+                                                    color: UiConstraints.instance.kfff,
+                                                    borderRadius: BorderRadius.circular(9999),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: UiConstraints.instance.kfe734c.withOpacity(0.1),
+                                                        offset: const Offset(0, 5),
+                                                        blurRadius: 6.0,
+                                                        spreadRadius: 2.0,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: Wrap(
+                                                      direction: Axis.horizontal,
+                                                      crossAxisAlignment: WrapCrossAlignment.center,
+                                                      spacing: 2.0,
+                                                      children: [
+                                                        Text(result.rating.rate.toStringAsFixed(1), style: UiConstraints.instance.px13w500k171718),
+                                                        const Icon(
+                                                          Icons.star,
+                                                          size: 12.0,
+                                                          color: Colors.amber,
+                                                        ),
+                                                        Text(
+                                                          '(${result.rating.count})',
+                                                          style: UiConstraints.instance.px12w400kc4c4c4,
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ),
-                                        ),
+                                          const SizedBox(
+                                            height: 20.0,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  result.title,
+                                                  textAlign: TextAlign.start,
+                                                  style: UiConstraints.instance.px18w600k171718.copyWith(
+                                                    fontSize: 16.0,
+                                                    overflow: TextOverflow.fade,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  result.recipe,
+                                                  maxLines: 2,
+                                                  style: UiConstraints.instance.px12w600k3a4f66.copyWith(
+                                                    overflow: TextOverflow.fade,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 4.0,
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () {},
+                                                  style: ElevatedButton.styleFrom(
+                                                    primary: UiConstraints.instance.kfe734c,
+                                                    shape: const StadiumBorder(),
+                                                  ),
+                                                  child: const Text('Add'),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
                                       ),
                                     ),
-                                  )
-                                : Container(
-                                    color: UiConstraints.instance.kfff,
-                                    child: const Center(
-                                      child: Text('There is no search results'),
-                                    ),
                                   ),
-                          )
+                                ),
+                              ))
                           .toList(),
                     ],
                   ),
                 ),
+                if (listQuery.isEmpty)
+                  Container(
+                    color: UiConstraints.instance.kfff,
+                    child: const Center(
+                      child: Text('There is no search results'),
+                    ),
+                  ),
               ],
             ),
-          ));
-    });
+          ),
+        );
+      },
+    );
   }
 }
