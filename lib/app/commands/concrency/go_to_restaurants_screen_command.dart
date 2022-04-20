@@ -1,6 +1,7 @@
 import 'package:food_delivery_app/app/commands/abstraction/i_base_command.dart';
 import 'package:food_delivery_app/app/di/app_di_container.dart';
 import 'package:food_delivery_app/ui/screens/all_restaurants/restaurants_screen.dart';
+import 'package:food_delivery_app/ui/view_models/concrency/main_viemodel.dart';
 
 class GoToRestaurantsScreenCommand extends IBaseCommand {
   @override
@@ -10,9 +11,12 @@ class GoToRestaurantsScreenCommand extends IBaseCommand {
 
   @override
   void execute(Map? params) {
-    // MainViewModel _vm = params!['vm'];
-    // final _screen = const RestaurantsScreen();
+    MainViewModel _vm = params!['vm'];
     final _router = AppDiContainer.instance.appRouter;
-    _router.goTo(screen: const RestaurantsScreen());
+    _router.goTo(
+      screen: RestaurantsScreen(
+        restaurantsViewModel: _vm.restaurantsViewModel,
+      ),
+    );
   }
 }

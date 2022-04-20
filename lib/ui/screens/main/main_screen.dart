@@ -25,8 +25,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
 
   @override
   void initState() {
-    _mainViewModel = MainViewModel();
-    _mainViewModel.updateUi = setState;
+    _mainViewModel = MainViewModel(updateUi: setState);
     _mainViewModel.initialize();
     super.initState();
     animationController = AnimationController(
@@ -76,6 +75,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                           child: Scaffold(
                             extendBody: true,
                             appBar: AppBar(
+                              elevation: 0,
                               title: MainAppBar(
                                 icon: AnimatedIcon(
                                   icon: AnimatedIcons.menu_close,
@@ -86,7 +86,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                                 onLeading: toggle,
                               ),
                             ),
-                            body: const HomePage(),
+                            body: HomePage(mainViewModel: _mainViewModel),
                             floatingActionButton: FloatingActionButton(
                               backgroundColor: UiConstraints.instance.kfe734c,
                               onPressed: () {},

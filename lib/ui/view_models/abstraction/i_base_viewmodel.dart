@@ -29,9 +29,8 @@ abstract class BaseViewModel {
   void tryUpdateUi() {
     try {
       updateUi!(() {});
-    } catch (e) {
-      throw Error;
-    }
+    // ignore: empty_catches
+    } catch (e) {}
   }
 
   BaseViewModel({

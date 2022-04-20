@@ -1,33 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_delivery_app/ui/view_models/concrency/main_viemodel.dart';
+import 'package:food_delivery_app/ui/widgets/search_bar_widget.dart';
 import '/ui/pages/home/components/home_food_search_widget.dart';
 import '/ui/pages/home/components/popular_restaurants_widget.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
-import '/ui/utils/constraints/ui_media.dart';
 import '/ui/view_models/concrency/home_viewmodel.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, required this.mainViewModel}) : super(key: key);
   static const route = '/home-page';
+  final MainViewModel mainViewModel;
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  late HomeViewModel _homeViewModel;
   @override
   void initState() {
-    _homeViewModel = HomeViewModel();
-    _homeViewModel.updateUi = setState;
-    _homeViewModel.initialize();
+    widget.mainViewModel.homeViewModel;
+    widget.mainViewModel.homeViewModel.updateUi = setState;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
-
+    final _homeViewModel = widget.mainViewModel.homeViewModel;
     return SingleChildScrollView(
       child: Container(
         color: UiConstraints.instance.kfff,
@@ -45,53 +44,8 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 12.0,
             ),
-            Container(
-              width: _size.width,
-              height: 42.0,
-              decoration: BoxDecoration(
-                color: UiConstraints.instance.kf8f8f8,
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () => showSearch(context: context, delegate: HomeFoodSearch(_homeViewModel)),
-                      child: SizedBox(
-                        height: 42.0,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Icon(
-                                Icons.search,
-                                color: UiConstraints.instance.kc4c4c4,
-                              ),
-                            ),
-                            Text(
-                              'Find Your Food',
-                              style: UiConstraints.instance.px14w400kc4c4c4,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) => buildSheet(),
-                    ),
-                    child: Padding(
-                        padding: const EdgeInsets.only(left: 16.0, right: 8.0),
-                        child: SvgPicture.asset(
-                          UiMedia.instance.filtersPath,
-                          color: UiConstraints.instance.kfe734c,
-                          width: 24.0,
-                        )),
-                  )
-                ],
-              ),
+            SearchBarWidget(
+              searchDelegateWidget: HomeFoodSearch(_homeViewModel),
             ),
             const SizedBox(
               height: 24.0,
@@ -105,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                   style: UiConstraints.instance.px18w600k171718,
                 ),
                 TextButton(
-                  onPressed: () => _homeViewModel.goToRestaurantsScreenCommand.doExecute({}),
+                  onPressed: () => _homeViewModel.goToRestaurantsScreenCommand.doExecute({"vm": _homeViewModel.mainViewModel}),
                   child: Text(
                     'See All (12)',
                     style: UiConstraints.instance.px12w600kfe734c,
@@ -189,6 +143,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  Widget buildSheet() => Container();
 }
