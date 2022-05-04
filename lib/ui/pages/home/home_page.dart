@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/ui/view_models/concrency/main_viemodel.dart';
 import 'package:food_delivery_app/ui/widgets/search_bar_widget.dart';
-import '/ui/pages/home/components/home_food_search_widget.dart';
+import '../../widgets/restaurant_food_search_widget.dart';
 import '/ui/pages/home/components/popular_restaurants_widget.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
 import '/ui/view_models/concrency/home_viewmodel.dart';
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               height: 12.0,
             ),
             SearchBarWidget(
-              searchDelegateWidget: HomeFoodSearch(_homeViewModel),
+              searchDelegateWidget: RestaurantFoodSearch(_homeViewModel),
             ),
             const SizedBox(
               height: 24.0,

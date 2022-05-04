@@ -4,9 +4,9 @@ import 'package:food_delivery_app/data/models/restaurant_model.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
 import '/ui/view_models/concrency/home_viewmodel.dart';
 
-class HomeFoodSearch extends SearchDelegate {
+class RestaurantFoodSearch extends SearchDelegate {
   final HomeViewModel viewModel;
-  HomeFoodSearch(this.viewModel);
+  RestaurantFoodSearch(this.viewModel);
 
   @override
   List<Widget> buildActions(BuildContext context) {
