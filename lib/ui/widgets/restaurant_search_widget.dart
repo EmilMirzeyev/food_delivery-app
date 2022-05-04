@@ -52,26 +52,37 @@ class RestaurantSearch extends SearchDelegate {
       }
     }
     return Container(
-        color: UiConstraints.instance.kfff,
-        child: restaurantList.isNotEmpty
-            ? Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: ListView.builder(
-                  itemCount: restaurantList.length,
-                  itemBuilder: (context, index) {
-                    var result = restaurantList[index];
-                    return InkWell(
-                      onTap: () {},
-                      child: RestaurantWidget(restaurant: result)
-                    );
-                  },
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      color: UiConstraints.instance.kfff,
+      child: restaurantList.isNotEmpty
+          ? Padding(
+              padding: const EdgeInsets.only(
+                top: 16.0,
+              ),
+              child: ListView.separated(
+                itemCount: restaurantList.length,
+                separatorBuilder: (BuildContext context, int i) {
+                  return const SizedBox(
+                    height: 14.0,
+                  );
+                },
+                itemBuilder: (context, index) {
+                  var result = restaurantList[index];
+                  return InkWell(
+                    onTap: () {},
+                    child: RestaurantWidget(restaurant: result),
+                  );
+                },
+              ),
+            )
+          : Container(
+              color: UiConstraints.instance.kfff,
+              child: const Center(
+                child: Text(
+                  'There is no search results',
                 ),
-              )
-            : Container(
-                color: UiConstraints.instance.kfff,
-                child: const Center(
-                  child: Text('There is no search results'),
-                ),
-              ));
+              ),
+            ),
+    );
   }
 }
