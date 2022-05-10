@@ -5,6 +5,19 @@ class BaseDto {
   BaseDto({this.id});
 }
 
+class WorkingTimes {
+  static final year = DateTime.now().year;
+  static final month = DateTime.now().month;
+  static final day = DateTime.now().day;
+  final DateTime opening;
+  final DateTime closing;
+
+  WorkingTimes({
+    required this.opening,
+    required this.closing,
+  });
+}
+
 class Rating {
   final dynamic rate;
   final int? count;
@@ -20,6 +33,7 @@ class RestaurantDto extends BaseDto {
   final String description;
   final String location;
   final String imageUrl;
+  final WorkingTimes workingTimes;
   final Rating rating;
   final List<FoodDto> foods;
 
@@ -28,6 +42,7 @@ class RestaurantDto extends BaseDto {
     required this.description,
     required this.location,
     required this.imageUrl,
+    required this.workingTimes,
     required this.rating,
     required this.foods,
     dynamic id,

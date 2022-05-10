@@ -7,6 +7,7 @@ class FoodModel extends BaseModel {
   final dynamic price;
   final String imageUrl;
   final String category;
+  final bool isPopular;
   final Rating rating;
 
   FoodModel({
@@ -16,6 +17,7 @@ class FoodModel extends BaseModel {
     required this.price,
     required this.imageUrl,
     required this.category,
+    required this.isPopular,
     required this.rating,
   }) : super(id: id);
 }

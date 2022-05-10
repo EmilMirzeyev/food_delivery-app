@@ -11,6 +11,7 @@ class FoodMigrator implements Migrator<FoodModel, FoodDto> {
       imageUrl: model.imageUrl,
       rating: model.rating,
       category: model.category,
+      isPopular: model.isPopular,
       recipe: model.recipe,
       price: model.price,
     );
@@ -24,6 +25,7 @@ class FoodMigrator implements Migrator<FoodModel, FoodDto> {
       imageUrl: dto.imageUrl,
       rating: dto.rating,
       category: dto.category,
+      isPopular: dto.isPopular,
       recipe: dto.recipe,
       price: dto.price,
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/ui/screens/main/main_screen.dart';
+import 'package:food_delivery_app/ui/screens/restaurant_detail/restaurant_screen.dart';
 import '/ui/screens/auth/auth_screen.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
 
@@ -46,6 +47,7 @@ class FoodDeliveryApp extends StatelessWidget {
       routes: {
         AuthScreen.route: (_) => const AuthScreen(),
         MainScreen.route: (_) => const MainScreen(),
+        RestaurantScreen.route: (_) => const RestaurantScreen(),
       },
       initialRoute: MainScreen.route,
     );

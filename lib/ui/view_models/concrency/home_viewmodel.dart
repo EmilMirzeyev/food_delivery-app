@@ -1,3 +1,4 @@
+import 'package:food_delivery_app/app/commands/concrency/go_to_restaurant_detail_screen_command.dart';
 import 'package:food_delivery_app/app/commands/concrency/go_to_restaurants_screen_command.dart';
 import 'package:food_delivery_app/ui/view_models/concrency/main_viemodel.dart';
 import '/app/commands/abstraction/i_base_command.dart';
@@ -13,6 +14,7 @@ class HomeViewModel extends BaseViewModel {
   late RequestState getProductsRequestState;
   late IBaseCommand getRestaurantsCommand;
   late IBaseCommand goToRestaurantsScreenCommand;
+  late IBaseCommand goToRestaurantDetailScreenCommand;
 
   late MainViewModel? mainViewModel;
 
@@ -22,6 +24,7 @@ class HomeViewModel extends BaseViewModel {
     getRestaurantsCommand = GetRestaurantsCommand();
     getRestaurantsCommand.doExecute({"vm": this});
     goToRestaurantsScreenCommand = GoToRestaurantsScreenCommand();
+    goToRestaurantDetailScreenCommand = GoToRestaurantDetailScreenCommand();
   }
 
   HomeViewModel({UpdateUi? updateUi, this.mainViewModel})

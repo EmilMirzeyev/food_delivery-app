@@ -6,6 +6,7 @@ class FoodDto extends BaseDto {
   final dynamic price;
   final String imageUrl;
   final String category;
+  final bool isPopular;
   final Rating rating;
 
   FoodDto({
@@ -14,7 +15,8 @@ class FoodDto extends BaseDto {
     required this.price,
     required this.imageUrl,
     required this.category,
+    required this.isPopular,
     required this.rating,
-    dynamic id
+    dynamic id,
   }) : super(id: id);
 }

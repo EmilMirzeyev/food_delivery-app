@@ -74,41 +74,44 @@ class _HomePageState extends State<HomePage> {
               runSpacing: 14.0,
               children: [
                 ..._homeViewModel.nearestRestaurants.map(
-                  (e) => Container(
-                    width: _size.width,
-                    height: 80.0,
-                    padding: const EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: UiConstraints.instance.kf8f8f8,
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    child: Row(
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 1,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12.0),
-                            child: Image.asset(
-                              e.imageUrl,
-                              fit: BoxFit.cover,
+                  (e) => InkWell(
+                    onTap: () => _homeViewModel.goToRestaurantDetailScreenCommand.doExecute({'restaurant': e}),
+                    child: Container(
+                      width: _size.width,
+                      height: 80.0,
+                      padding: const EdgeInsets.all(6.0),
+                      decoration: BoxDecoration(
+                        color: UiConstraints.instance.kf8f8f8,
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      child: Row(
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 1,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12.0),
+                              child: Image.asset(
+                                e.imageUrl,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 16.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(e.title),
-                            const SizedBox(
-                              height: 4.0,
-                            ),
-                            Text(e.location),
-                          ],
-                        ),
-                      ],
+                          const SizedBox(
+                            width: 16.0,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(e.title),
+                              const SizedBox(
+                                height: 4.0,
+                              ),
+                              Text(e.location),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
