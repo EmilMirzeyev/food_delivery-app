@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/data/models/food_model.dart';
 import '/ui/screens/restaurant_detail/components/restaurant_heading_widget.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
 import '/ui/view_models/concrency/restaurant_viewmodel.dart';
@@ -150,7 +151,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
                                           margin: const EdgeInsets.only(right: 8.0),
                                           decoration: BoxDecoration(
-                                            color: UiConstraints.instance.k171718,
+                                            color: UiConstraints.instance.kfe734c,
                                             borderRadius: BorderRadius.circular(999.0),
                                           ),
                                           child: Center(
@@ -162,17 +163,20 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                         ),
                                         ...widget.restaurantViewModel!.restaurant.foods
                                             .map(
-                                              (e) => Container(
-                                                padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-                                                margin: const EdgeInsets.only(right: 8.0),
-                                                decoration: BoxDecoration(
-                                                  color: UiConstraints.instance.k171718,
-                                                  borderRadius: BorderRadius.circular(999.0),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    e.category,
-                                                    style: UiConstraints.instance.px14w600kffffff,
+                                              (e) => InkWell(
+                                                //TODO onTap
+                                                child: Container(
+                                                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                                                  margin: const EdgeInsets.only(right: 8.0),
+                                                  decoration: BoxDecoration(
+                                                    color: UiConstraints.instance.kfe734c,
+                                                    borderRadius: BorderRadius.circular(999.0),
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      e.category,
+                                                      style: UiConstraints.instance.px14w600kffffff,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -180,9 +184,16 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                             .toList(),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
+                            ),
+                            ...List.generate(
+                              widget.restaurantViewModel!.restaurant.foods.length,
+                              (i) {
+                                final FoodModel meal = widget.restaurantViewModel!.restaurant.foods[i];
+                                return Text(meal.title);
+                              },
                             ),
                           ],
                         ),

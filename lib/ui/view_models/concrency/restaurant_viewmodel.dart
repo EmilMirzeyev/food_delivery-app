@@ -7,10 +7,13 @@ import 'package:intl/intl.dart';
 class RestaurantViewModel extends BaseViewModel {
   final RestaurantModel restaurant;
   int selectedIndex = 0;
+  int selectedCategory = 0;
   late IRouter router;
   late bool opened = DateTime.now().isAfter(restaurant.workingTimes.opening) && DateTime.now().isBefore(restaurant.workingTimes.closing);
   late String openingTime = DateFormat('kk:mm').format(restaurant.workingTimes.opening);
   late String closingTime = DateFormat('kk:mm').format(restaurant.workingTimes.closing);
+
+  void changeCategory() {}
 
   void changeSelectedIndex(index) {
     selectedIndex = index;
