@@ -5,50 +5,60 @@ import 'package:food_delivery_app/data/network/abstraction/i_food_delivery_resta
 var today = DateTime.now();
 var fiftyDaysFromNow = today.add(const Duration(hours: 1));
 
+class AddInfo {
+  final dynamic id;
+  final String info;
+  final String icon;
+
+  AddInfo({this.id, required this.info, required this.icon});
+}
+
 class RestaurantsNetworkManager extends IFoodDeliveryRestaurantsNetworkManager {
   @override
   Future<List<RestaurantDto>> getRestaurants() async {
     List<RestaurantDto> _dtos = [
       RestaurantDto(
-        title: "Noma",
-        description:
-            "Noma is a three-Michelin-star restaurant run by chef René Redzepi in Copenhagen, Denmark. The name is a syllabic abbreviation of the two Danish words 'nordisk' (Nordic) and 'mad' (food). Opened in 2003, the restaurant is known for its focus on foraging, invention and interpretation of New Nordic Cuisine. In 2010, 2011, 2012, and 2014, it was ranked as the Best Restaurant in the World by Restaurant magazine. In 2021 it won the first spot in the World's 50 Best Restaurants Awards.",
-        location: "Denmark, Copenhagen,	Refshalevej 96",
-        imageUrl: "assets/images/restaurants/noma.jpg",
-        workingTimes: WorkingTimes(
-            opening: DateTime(WorkingTimes.year, WorkingTimes.month, WorkingTimes.day, 16, 15),
-            closing: DateTime(WorkingTimes.year, WorkingTimes.month, WorkingTimes.day, 21, 15)),
-        rating: Rating(
-          rate: 4.8,
-          count: 56,
-        ),
-        foods: [
-          FoodDto(
-            title: "Caesar",
-            recipe: "Cucumber, tamoto, cheese, rye bread, sauce",
-            price: 48.25,
-            imageUrl: "assets/images/foods/sezar.jpg",
-            category: "Salads",
-            isPopular: false,
-            rating: Rating(
-              rate: 3.2,
-              count: 41,
-            ),
+          title: "Noma",
+          description:
+              "Noma is a three-Michelin-star restaurant run by chef René Redzepi in Copenhagen, Denmark. The name is a syllabic abbreviation of the two Danish words 'nordisk' (Nordic) and 'mad' (food). Opened in 2003, the restaurant is known for its focus on foraging, invention and interpretation of New Nordic Cuisine. In 2010, 2011, 2012, and 2014, it was ranked as the Best Restaurant in the World by Restaurant magazine. In 2021 it won the first spot in the World's 50 Best Restaurants Awards.",
+          location: "Denmark, Copenhagen,	Refshalevej 96",
+          imageUrl: "assets/images/restaurants/noma.jpg",
+          workingTimes: WorkingTimes(
+              opening: DateTime(WorkingTimes.year, WorkingTimes.month, WorkingTimes.day, 16, 15),
+              closing: DateTime(WorkingTimes.year, WorkingTimes.month, WorkingTimes.day, 21, 15)),
+          rating: Rating(
+            rate: 4.8,
+            count: 56,
           ),
-          FoodDto(
-            title: "Beef Wellington",
-            recipe: "Beef, mushrooms, flour, eggs, butter",
-            price: 48.25,
-            imageUrl: "assets/images/foods/beef-wellington.jpg",
-            category: "Meat",
-            isPopular: true,
-            rating: Rating(
-              rate: 3.2,
-              count: 41,
+          foods: [
+            FoodDto(
+              title: "Caesar",
+              recipe: "Cucumber, tamoto, cheese, rye bread, sauce",
+              price: 48.25,
+              imageUrl: "assets/images/foods/sezar.jpg",
+              category: "Salads",
+              isPopular: false,
+              rating: Rating(
+                rate: 3.2,
+                count: 41,
+              ),
             ),
-          ),
-        ],
-      ),
+            FoodDto(
+              title: "Beef Wellington",
+              recipe: "Beef, mushrooms, flour, eggs, butter",
+              price: 48.25,
+              imageUrl: "assets/images/foods/beef-wellington.jpg",
+              category: "Meat",
+              isPopular: true,
+              rating: Rating(
+                rate: 3.2,
+                count: 41,
+              ),
+            ),
+          ],
+          additionalInfo: [
+            AddInfo(info: "Terrace", icon: "assets/images/icons/terrace.png")
+          ]),
       RestaurantDto(
         title: "Geranium",
         description:

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/data/models/food_model.dart';
 import '/ui/screens/restaurant_detail/components/restaurant_heading_widget.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
 import '/ui/view_models/concrency/restaurant_viewmodel.dart';
@@ -23,6 +22,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size _size = MediaQuery.of(context).size;
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -95,7 +95,11 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   ),
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    height: widget.restaurantViewModel!.selectedIndex == 0 ? 650.0 : 250.0,
+                    height: widget.restaurantViewModel!.selectedIndex == 0
+                        ? widget.restaurantViewModel!.filteredFoods.length % 2 == 0
+                            ? (widget.restaurantViewModel!.filteredFoods.length / 2) * 310.0 + 48.0
+                            : ((widget.restaurantViewModel!.filteredFoods.length + 1) / 2) * 310.0 + 48.0
+                        : 250.0,
                     child: TabBarView(
                       children: [
                         Column(
@@ -146,67 +150,209 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                   Expanded(
                                     child: ListView(
                                       scrollDirection: Axis.horizontal,
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-                                          margin: const EdgeInsets.only(right: 8.0),
-                                          decoration: BoxDecoration(
-                                            color: UiConstraints.instance.kfe734c,
-                                            borderRadius: BorderRadius.circular(999.0),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              'Most Popular',
-                                              style: UiConstraints.instance.px14w600kffffff,
+                                      children: List.generate(
+                                        widget.restaurantViewModel!.foodCategories.length,
+                                        (i) {
+                                          final String category = widget.restaurantViewModel!.foodCategories[i];
+
+                                          return Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                                            margin: const EdgeInsets.only(right: 8.0),
+                                            decoration: BoxDecoration(
+                                              color: category == widget.restaurantViewModel!.selectedCategory
+                                                  ? UiConstraints.instance.kfe734c
+                                                  : UiConstraints.instance.kfff,
+                                              borderRadius: BorderRadius.circular(999.0),
                                             ),
-                                          ),
-                                        ),
-                                        ...widget.restaurantViewModel!.restaurant.foods
-                                            .map(
-                                              (e) => InkWell(
-                                                //TODO onTap
-                                                child: Container(
-                                                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-                                                  margin: const EdgeInsets.only(right: 8.0),
-                                                  decoration: BoxDecoration(
-                                                    color: UiConstraints.instance.kfe734c,
-                                                    borderRadius: BorderRadius.circular(999.0),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      e.category,
-                                                      style: UiConstraints.instance.px14w600kffffff,
-                                                    ),
-                                                  ),
+                                            child: InkWell(
+                                              onTap: () => widget.restaurantViewModel!.selectCategory(category),
+                                              child: Center(
+                                                child: Text(
+                                                  category,
+                                                  style: category == widget.restaurantViewModel!.selectedCategory
+                                                      ? UiConstraints.instance.px14w600kffffff
+                                                      : UiConstraints.instance.px14w600k3a4f66,
                                                 ),
                                               ),
-                                            )
-                                            .toList(),
-                                      ],
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            ...List.generate(
-                              widget.restaurantViewModel!.restaurant.foods.length,
-                              (i) {
-                                final FoodModel meal = widget.restaurantViewModel!.restaurant.foods[i];
-                                return Text(meal.title);
-                              },
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Wrap(
+                                alignment: WrapAlignment.start,
+                                children: widget.restaurantViewModel!.filteredFoods
+                                    .map(
+                                      (result) => InkWell(
+                                        child: SizedBox(
+                                          width: _size.width * 0.5 - 8.0,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(12.0),
+                                                color: UiConstraints.instance.kfff,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: UiConstraints.instance.k3a4f66.withOpacity(0.3),
+                                                    offset: const Offset(2, 0),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 2.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                children: [
+                                                  Stack(
+                                                    clipBehavior: Clip.none,
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius: BorderRadius.circular(12.0),
+                                                        child: AspectRatio(
+                                                          aspectRatio: 1,
+                                                          child: Image.asset(
+                                                            result.imageUrl,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Positioned(
+                                                        top: 8.0,
+                                                        left: 8.0,
+                                                        child: Container(
+                                                          padding: const EdgeInsets.all(8.0),
+                                                          decoration: BoxDecoration(
+                                                            color: UiConstraints.instance.kfff,
+                                                            borderRadius: BorderRadius.circular(9999),
+                                                          ),
+                                                          child: Row(
+                                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                                            children: [
+                                                              Text(
+                                                                '₼',
+                                                                style: UiConstraints.instance.px12w600kfe734c,
+                                                              ),
+                                                              Text(
+                                                                result.price.toStringAsFixed(2),
+                                                                style: UiConstraints.instance.px18w600k171718,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Positioned(
+                                                        bottom: -15.0,
+                                                        left: 8.0,
+                                                        child: Container(
+                                                          height: 30.0,
+                                                          padding: const EdgeInsets.all(8.0),
+                                                          decoration: BoxDecoration(
+                                                            color: UiConstraints.instance.kfff,
+                                                            borderRadius: BorderRadius.circular(9999),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: UiConstraints.instance.kfe734c.withOpacity(0.1),
+                                                                offset: const Offset(0, 5),
+                                                                blurRadius: 6.0,
+                                                                spreadRadius: 2.0,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          child: Align(
+                                                            alignment: Alignment.center,
+                                                            child: Wrap(
+                                                              direction: Axis.horizontal,
+                                                              crossAxisAlignment: WrapCrossAlignment.center,
+                                                              spacing: 2.0,
+                                                              children: [
+                                                                Text(result.rating.rate.toStringAsFixed(1), style: UiConstraints.instance.px13w500k171718),
+                                                                const Icon(
+                                                                  Icons.star,
+                                                                  size: 12.0,
+                                                                  color: Colors.amber,
+                                                                ),
+                                                                Text(
+                                                                  '(${result.rating.count})',
+                                                                  style: UiConstraints.instance.px12w400kc4c4c4,
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 20.0,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          result.title,
+                                                          textAlign: TextAlign.start,
+                                                          style: UiConstraints.instance.px18w600k171718.copyWith(
+                                                            fontSize: 16.0,
+                                                            overflow: TextOverflow.fade,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          result.recipe,
+                                                          maxLines: 2,
+                                                          style: UiConstraints.instance.px12w600k3a4f66.copyWith(
+                                                            overflow: TextOverflow.fade,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 4.0,
+                                                        ),
+                                                        ElevatedButton(
+                                                          onPressed: () {},
+                                                          style: ElevatedButton.styleFrom(
+                                                            primary: UiConstraints.instance.kfe734c,
+                                                            shape: const StadiumBorder(),
+                                                          ),
+                                                          child: const Text('Add'),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
                             ),
                           ],
                         ),
-                        const Icon(Icons.directions_bike),
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: 32.0,
+                              height: 32.0,
+                              child: Image.asset(widget.restaurantViewModel!.restaurant.additionalInfo![0].icon),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-          const SliverToBoxAdapter(
-            child: Text('Qunduz'),
           ),
         ],
       ),

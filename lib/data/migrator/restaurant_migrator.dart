@@ -16,6 +16,7 @@ class RestaurantMigrator implements Migrator<RestaurantModel, RestaurantDto> {
       workingTimes: model.workingTimes,
       rating: model.rating,
       foods: model.foods.map((e) => FoodMigrator().migrateToDto(e)).toList(),
+      additionalInfo: model.additionalInfo,
     );
   }
 
@@ -30,6 +31,7 @@ class RestaurantMigrator implements Migrator<RestaurantModel, RestaurantDto> {
       workingTimes: dto.workingTimes,
       rating: dto.rating,
       foods: dto.foods.map((e) => FoodMigrator().migrateToModel(e)).toList(),
+      additionalInfo: dto.additionalInfo,
     );
   }
 }

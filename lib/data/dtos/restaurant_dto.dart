@@ -1,4 +1,5 @@
 import 'package:food_delivery_app/data/dtos/food_dto.dart';
+import 'package:food_delivery_app/data/network/concrency/restaurants_network_manager.dart';
 
 class BaseDto {
   late dynamic id;
@@ -36,6 +37,7 @@ class RestaurantDto extends BaseDto {
   final WorkingTimes workingTimes;
   final Rating rating;
   final List<FoodDto> foods;
+  final List<AddInfo>? additionalInfo;
 
   RestaurantDto({
     required this.title,
@@ -45,6 +47,7 @@ class RestaurantDto extends BaseDto {
     required this.workingTimes,
     required this.rating,
     required this.foods,
+    this.additionalInfo,
     dynamic id,
   }) : super(id: id);
 }
