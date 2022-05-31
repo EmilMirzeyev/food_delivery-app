@@ -338,14 +338,36 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                             ),
                           ],
                         ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              width: 32.0,
-                              height: 32.0,
-                              child: Image.asset(widget.restaurantViewModel!.restaurant.additionalInfo![0].icon),
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Column(
+                            children: [
+                              Wrap(
+                                alignment: WrapAlignment.center,
+                                spacing: 8.0,
+                                runSpacing: 8.0,
+                                children: <Widget>[
+                                  ...widget.restaurantViewModel!.restaurant.additionalInfo!
+                                      .map(
+                                        (e) => Chip(
+                                          avatar: CircleAvatar(backgroundImage: AssetImage(e.icon)),
+                                          label: Text(e.info),
+                                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                          backgroundColor: UiConstraints.instance.kf8f8f8,
+                                        ),
+                                      )
+                                      .toList(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 16.0),
+                                    child: Text(
+                                      '\t\t\t\t\t\t\t' + widget.restaurantViewModel!.restaurant.description,
+                                      style: UiConstraints.instance.px12w500k617282.copyWith(fontStyle: FontStyle.italic, height: 1.3),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

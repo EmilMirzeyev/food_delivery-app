@@ -57,7 +57,11 @@ class RestaurantsNetworkManager extends IFoodDeliveryRestaurantsNetworkManager {
             ),
           ],
           additionalInfo: [
-            AddInfo(info: "Terrace", icon: "assets/images/icons/terrace.png")
+            AddInfo(info: "Terrace", icon: "assets/images/icons/terrace.png"),
+            AddInfo(info: "Garage", icon: "assets/images/icons/garage.png"),
+            AddInfo(info: "Garageagg", icon: "assets/images/icons/garage.png"),
+            AddInfo(info: "Maraguesu", icon: "assets/images/icons/garage.png"),
+            AddInfo(info: "Lorem ipsum", icon: "assets/images/icons/garage.png"),
           ]),
       RestaurantDto(
         title: "Geranium",
