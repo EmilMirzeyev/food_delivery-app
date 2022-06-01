@@ -1,8 +1,9 @@
-import 'package:food_delivery_app/app/di/app_di_container.dart';
-import 'package:food_delivery_app/app/routing/abstraction/i_router.dart';
-import 'package:food_delivery_app/data/models/food_model.dart';
-import 'package:food_delivery_app/data/models/restaurant_model.dart';
-import 'package:food_delivery_app/ui/view_models/abstraction/i_base_viewmodel.dart';
+import '/app/di/app_di_container.dart';
+import '/app/routing/abstraction/i_router.dart';
+import '/data/models/food_model.dart';
+import '/data/models/restaurant_model.dart';
+import '/ui/view_models/abstraction/i_base_viewmodel.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 
 class RestaurantViewModel extends BaseViewModel {
@@ -15,6 +16,12 @@ class RestaurantViewModel extends BaseViewModel {
   late bool opened = DateTime.now().isAfter(restaurant.workingTimes.opening) && DateTime.now().isBefore(restaurant.workingTimes.closing);
   late String openingTime = DateFormat('kk:mm').format(restaurant.workingTimes.opening);
   late String closingTime = DateFormat('kk:mm').format(restaurant.workingTimes.closing);
+  late GoogleMapController mapController;
+  final Set<Marker> markers = {};
+  final cameraPosition = const CameraPosition(
+    target: LatLng(55.684341, 12.608375),
+    zoom: 17,
+  );
 
   void changeSelectedIndex(index) {
     selectedIndex = index;
@@ -37,6 +44,23 @@ class RestaurantViewModel extends BaseViewModel {
     tryUpdateUi();
   }
 
+  void recenterMap() {
+    mapController.moveCamera(CameraUpdate.newCameraPosition(cameraPosition));
+  }
+
+  void onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+    markers.add(
+      Marker(
+        markerId: const MarkerId('id-1'),
+        // icon: mapMarker,
+        position: const LatLng(55.684341, 12.608375),
+        infoWindow: InfoWindow(title: restaurant.title),
+      ),
+    );
+    tryUpdateUi();
+  }
+
   @override
   void initialize() {
     filteredFoods.addAll(restaurant.foods);
@@ -51,72 +75,3 @@ class RestaurantViewModel extends BaseViewModel {
 
   RestaurantViewModel({UpdateUi? updateUi, required this.restaurant}) : super(updateUi: updateUi);
 }
-
-// import 'package:food_delivery_app/app/di/app_di_container.dart';
-// import 'package:food_delivery_app/app/routing/abstraction/i_router.dart';
-// import 'package:food_delivery_app/data/models/food_model.dart';
-// import 'package:food_delivery_app/data/models/restaurant_model.dart';
-// import 'package:food_delivery_app/ui/view_models/abstraction/i_base_viewmodel.dart';
-// import 'package:intl/intl.dart';
-
-// class RestaurantViewModel extends BaseViewModel {
-//   final RestaurantModel restaurant;
-//   late List<FoodModel> filteredFoods = [];
-//   late List foodCategories = [
-//     {
-//       "id": 99999,
-//       "category": "All",
-//       "isSelected": true,
-//     },
-//     {
-//       "id": 99998,
-//       "category": "Most popular",
-//       "isSelected": false,
-//     },
-//   ];
-//   int selectedIndex = 0;
-//   int selectedCategory = 0;
-//   late IRouter router;
-//   late bool opened = DateTime.now().isAfter(restaurant.workingTimes.opening) && DateTime.now().isBefore(restaurant.workingTimes.closing);
-//   late String openingTime = DateFormat('kk:mm').format(restaurant.workingTimes.opening);
-//   late String closingTime = DateFormat('kk:mm').format(restaurant.workingTimes.closing);
-
-//   void changeSelectedIndex(index) {
-//     selectedIndex = index;
-//     tryUpdateUi();
-//   }
-
-//   void selectCategory(String category) {
-//     if (category == "All") {
-//       filteredFoods = restaurant.foods;
-//     } else if (category == "Most popular") {
-//       filteredFoods = restaurant.foods.where((e) => e.isPopular).toList();
-//     } else {
-//       for (var foodCategory in foodCategories) {
-//         if (foodCategory == category) {
-//           filteredFoods = restaurant.foods.where((e) => e.category == category).toList();
-//         }
-//       }
-//     }
-//     tryUpdateUi();
-//   }
-
-//   @override
-//   void initialize() {
-//     filteredFoods.addAll(restaurant.foods);
-//     for (var food in restaurant.foods) {
-//       if (!foodCategories.contains(food.category)) {
-//         foodCategories.add(
-//           {
-//             "id": food.id,
-//             "category": food.category,
-//             "isSelected": false,
-//           },
-//         );
-//       }
-//     }
-//     router = AppDiContainer.instance.appRouter;
-//   }
-
-//   RestaurantViewModel({UpdateUi? updateUi, required this.restaurant}) : super(updateUi: updateUi);
-// }

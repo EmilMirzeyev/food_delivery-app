@@ -1,6 +1,6 @@
-import 'package:food_delivery_app/data/dtos/food_dto.dart';
-import 'package:food_delivery_app/data/dtos/restaurant_dto.dart';
-import 'package:food_delivery_app/data/network/abstraction/i_food_delivery_restaurants_network_manager.dart';
+import '/data/dtos/food_dto.dart';
+import '/data/dtos/restaurant_dto.dart';
+import '/data/network/abstraction/i_food_delivery_restaurants_network_manager.dart';
 
 var today = DateTime.now();
 var fiftyDaysFromNow = today.add(const Duration(hours: 1));
@@ -59,9 +59,8 @@ class RestaurantsNetworkManager extends IFoodDeliveryRestaurantsNetworkManager {
           additionalInfo: [
             AddInfo(info: "Terrace", icon: "assets/images/icons/terrace.png"),
             AddInfo(info: "Garage", icon: "assets/images/icons/garage.png"),
-            AddInfo(info: "Garageagg", icon: "assets/images/icons/garage.png"),
-            AddInfo(info: "Maraguesu", icon: "assets/images/icons/garage.png"),
-            AddInfo(info: "Lorem ipsum", icon: "assets/images/icons/garage.png"),
+            AddInfo(info: "Swedish Table", icon: "assets/images/icons/swedish_table.png"),
+            AddInfo(info: "Wifi", icon: "assets/images/icons/wifi.png"),
           ]),
       RestaurantDto(
         title: "Geranium",

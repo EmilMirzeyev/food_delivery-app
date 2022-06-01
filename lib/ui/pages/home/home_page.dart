@@ -4,7 +4,6 @@ import 'package:food_delivery_app/ui/widgets/search_bar_widget.dart';
 import '../../widgets/restaurant_food_search_widget.dart';
 import '/ui/pages/home/components/popular_restaurants_widget.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
-import '/ui/view_models/concrency/home_viewmodel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.mainViewModel}) : super(key: key);

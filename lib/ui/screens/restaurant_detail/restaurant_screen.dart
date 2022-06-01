@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '/ui/screens/restaurant_detail/components/restaurant_heading_widget.dart';
 import '/ui/utils/constraints/ui_constraints.dart';
 import '/ui/view_models/concrency/restaurant_viewmodel.dart';
@@ -13,6 +16,7 @@ class RestaurantScreen extends StatefulWidget {
 }
 
 class _RestaurantScreenState extends State<RestaurantScreen> {
+
   @override
   void initState() {
     widget.restaurantViewModel!.updateUi = setState;
@@ -23,6 +27,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -99,7 +104,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                         ? widget.restaurantViewModel!.filteredFoods.length % 2 == 0
                             ? (widget.restaurantViewModel!.filteredFoods.length / 2) * 310.0 + 48.0
                             : ((widget.restaurantViewModel!.filteredFoods.length + 1) / 2) * 310.0 + 48.0
-                        : 250.0,
+                        : 800.0,
                     child: TabBarView(
                       children: [
                         Column(
@@ -357,14 +362,56 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                         ),
                                       )
                                       .toList(),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 16.0),
-                                    child: Text(
-                                      '\t\t\t\t\t\t\t' + widget.restaurantViewModel!.restaurant.description,
-                                      style: UiConstraints.instance.px12w500k617282.copyWith(fontStyle: FontStyle.italic, height: 1.3),
-                                    ),
-                                  )
                                 ],
+                              ),
+                              const SizedBox(
+                                height: 16.0,
+                              ),
+                              Stack(
+                                children: [
+                                  SizedBox(
+                                    width: _size.width,
+                                    height: 200.0,
+                                    child: ClipRRect(
+                                      borderRadius: UiConstraints.instance.borderRadius,
+                                      child: GoogleMap(
+                                        onMapCreated: widget.restaurantViewModel!.onMapCreated,
+                                        markers: widget.restaurantViewModel!.markers,
+                                        initialCameraPosition: widget.restaurantViewModel!.cameraPosition,
+                                        zoomControlsEnabled: false,
+                                        zoomGesturesEnabled: true,
+                                        mapType: MapType.satellite,
+                                        scrollGesturesEnabled: true,
+                                        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                                          Factory<OneSequenceGestureRecognizer>(
+                                            () => EagerGestureRecognizer(),
+                                          ),
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    right: 8.0,
+                                    top: 8.0,
+                                    child: InkWell(
+                                      onTap: () => widget.restaurantViewModel!.recenterMap(),
+                                      child: CircleAvatar(
+                                        backgroundColor: UiConstraints.instance.kf8f8f8,
+                                        child: Icon(
+                                          Icons.gps_fixed,
+                                          color: UiConstraints.instance.k171718,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16.0),
+                                child: Text(
+                                  '\t\t\t\t\t\t\t' + widget.restaurantViewModel!.restaurant.description,
+                                  style: UiConstraints.instance.px12w500k617282.copyWith(fontStyle: FontStyle.italic, height: 1.3),
+                                ),
                               ),
                             ],
                           ),
