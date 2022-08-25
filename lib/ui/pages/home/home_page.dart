@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 ..._homeViewModel.nearestRestaurants.map(
                   (e) => InkWell(
-                    onTap: () => _homeViewModel.goToRestaurantDetailScreenCommand.doExecute({'restaurant': e}),
+                    onTap: () => _homeViewModel.goToRestaurantDetailScreenCommand.doExecute({'mvm': _homeViewModel.mainViewModel, 'restaurant': e}),
                     child: Container(
                       width: _size.width,
                       height: 80.0,

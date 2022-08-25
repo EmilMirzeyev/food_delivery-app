@@ -65,119 +65,118 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                   ..rotateY(angle),
                 alignment: Alignment.centerLeft,
                 child: GestureDetector(
-                    onTap: () => animationController.value == 1.0 ? toggle() : null,
-                    child: Stack(
-                      children: [
-                        PhysicalModel(
-                          color: UiConstraints.instance.kfe734c,
-                          elevation: 8.0,
-                          shadowColor: UiConstraints.instance.kfe734c.withOpacity(0.5),
-                          child: Scaffold(
-                            extendBody: true,
-                            appBar: AppBar(
-                              elevation: 0,
-                              title: MainAppBar(
-                                icon: AnimatedIcon(
-                                  icon: AnimatedIcons.menu_close,
-                                  progress: animationController,
-                                  size: 28.0,
-                                  color: UiConstraints.instance.k171718,
-                                ),
-                                onLeading: toggle,
-                              ),
-                            ),
-                            body: HomePage(mainViewModel: _mainViewModel),
-                            floatingActionButton: FloatingActionButton(
-                              backgroundColor: UiConstraints.instance.kfe734c,
-                              onPressed: () {},
-                              child: IconButton(
-                                icon: SvgPicture.asset(
-                                  UiMedia.instance.shoppingPath,
-                                  color: UiConstraints.instance.kfff,
-                                  width: 28.0,
-                                ),
-                                onPressed: () {},
+                  onTap: () => animationController.value == 1.0 ? toggle() : null,
+                  child: Stack(
+                    children: [
+                      PhysicalModel(
+                        color: UiConstraints.instance.kfe734c,
+                        elevation: 8.0,
+                        shadowColor: UiConstraints.instance.kfe734c.withOpacity(0.5),
+                        child: Scaffold(
+                          extendBody: true,
+                          appBar: AppBar(
+                            elevation: 0,
+                            title: MainAppBar(
+                              icon: AnimatedIcon(
+                                icon: AnimatedIcons.menu_close,
+                                progress: animationController,
+                                size: 28.0,
                                 color: UiConstraints.instance.k171718,
-                                iconSize: 30.0,
-                                splashRadius: 0.1,
-                                highlightColor: Colors.transparent,
+                              ),
+                              onLeading: toggle,
+                            ),
+                          ),
+                          body: HomePage(mainViewModel: _mainViewModel),
+                          floatingActionButton: FloatingActionButton(
+                            backgroundColor: UiConstraints.instance.kfe734c,
+                            onPressed: () => _mainViewModel.goToBasketScreenCommand.doExecute({"vm": _mainViewModel}),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: SvgPicture.asset(
+                                UiMedia.instance.shoppingPath,
+                                color: UiConstraints.instance.kfff,
+                                width: 28.0,
                               ),
                             ),
-                            floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-                            bottomNavigationBar: BottomAppBar(
-                              elevation: 25.0,
-                              notchMargin: 6.0,
-                              color: UiConstraints.instance.kf8f8f8,
-                              shape: const CircularNotchedRectangle(),
-                              child: SizedBox(
-                                height: 60.0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      IconButton(
-                                        icon: SvgPicture.asset(
-                                          UiMedia.instance.homePath,
-                                          color: UiConstraints.instance.k3a4f66,
-                                          width: 28.0,
-                                        ),
-                                        onPressed: () {},
-                                        color: UiConstraints.instance.k171718,
-                                        iconSize: 30.0,
-                                        splashRadius: 0.1,
-                                        highlightColor: Colors.transparent,
+                          ),
+                          floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+                          bottomNavigationBar: BottomAppBar(
+                            elevation: 25.0,
+                            notchMargin: 6.0,
+                            color: UiConstraints.instance.kf8f8f8,
+                            shape: const CircularNotchedRectangle(),
+                            child: SizedBox(
+                              height: 60.0,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    IconButton(
+                                      icon: SvgPicture.asset(
+                                        UiMedia.instance.homePath,
+                                        color: UiConstraints.instance.k3a4f66,
+                                        width: 28.0,
                                       ),
-                                      IconButton(
-                                        icon: Icon(
-                                          Icons.search,
-                                          color: UiConstraints.instance.k3a4f66,
-                                        ),
-                                        onPressed: () {},
-                                        color: UiConstraints.instance.k171718,
-                                        iconSize: 30.0,
-                                        splashRadius: 0.1,
-                                        highlightColor: Colors.transparent,
+                                      onPressed: () {},
+                                      color: UiConstraints.instance.k171718,
+                                      iconSize: 30.0,
+                                      splashRadius: 0.1,
+                                      highlightColor: Colors.transparent,
+                                    ),
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.search,
+                                        color: UiConstraints.instance.k3a4f66,
                                       ),
-                                      const SizedBox(
-                                        width: 26.0,
+                                      onPressed: () {},
+                                      color: UiConstraints.instance.k171718,
+                                      iconSize: 30.0,
+                                      splashRadius: 0.1,
+                                      highlightColor: Colors.transparent,
+                                    ),
+                                    const SizedBox(
+                                      width: 26.0,
+                                    ),
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.edit_note,
+                                        color: UiConstraints.instance.k3a4f66,
                                       ),
-                                      IconButton(
-                                        icon: Icon(
-                                          Icons.edit_note,
-                                          color: UiConstraints.instance.k3a4f66,
-                                        ),
-                                        onPressed: () {},
-                                        color: UiConstraints.instance.k171718,
-                                        iconSize: 30.0,
-                                        splashRadius: 0.1,
-                                        highlightColor: Colors.transparent,
+                                      onPressed: () {},
+                                      color: UiConstraints.instance.k171718,
+                                      iconSize: 30.0,
+                                      splashRadius: 0.1,
+                                      highlightColor: Colors.transparent,
+                                    ),
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.person,
+                                        color: UiConstraints.instance.k3a4f66,
                                       ),
-                                      IconButton(
-                                        icon: Icon(
-                                          Icons.person,
-                                          color: UiConstraints.instance.k3a4f66,
-                                        ),
-                                        onPressed: () {},
-                                        color: UiConstraints.instance.k171718,
-                                        iconSize: 30.0,
-                                        splashRadius: 0.1,
-                                        highlightColor: Colors.transparent,
-                                      ),
-                                    ],
-                                  ),
+                                      onPressed: () {},
+                                      color: UiConstraints.instance.k171718,
+                                      iconSize: 30.0,
+                                      splashRadius: 0.1,
+                                      highlightColor: Colors.transparent,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        animationController.value == 1.0
-                            ? Container(
-                                color: Colors.transparent,
-                              )
-                            : const SizedBox()
-                      ],
-                    )),
+                      ),
+                      animationController.value == 1.0
+                          ? Container(
+                              color: Colors.transparent,
+                            )
+                          : const SizedBox()
+                    ],
+                  ),
+                ),
               ),
             ],
           );

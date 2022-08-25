@@ -9,6 +9,7 @@ class FoodModel extends BaseModel {
   final String category;
   final bool isPopular;
   final Rating rating;
+  int? quantity;
 
   FoodModel({
     required dynamic id,
@@ -19,5 +20,6 @@ class FoodModel extends BaseModel {
     required this.category,
     required this.isPopular,
     required this.rating,
+    this.quantity = 1,
   }) : super(id: id);
 }

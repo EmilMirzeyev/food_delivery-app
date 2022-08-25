@@ -1,3 +1,9 @@
+import 'package:food_delivery_app/app/commands/abstraction/i_base_command.dart';
+import 'package:food_delivery_app/app/commands/concrency/add_to_basket_command.dart';
+import 'package:food_delivery_app/app/commands/concrency/go_to_food_screen_command.dart';
+import 'package:food_delivery_app/ui/view_models/concrency/basket_viewmodel.dart';
+import 'package:food_delivery_app/ui/view_models/concrency/main_viemodel.dart';
+
 import '/app/di/app_di_container.dart';
 import '/app/routing/abstraction/i_router.dart';
 import '/data/models/food_model.dart';
@@ -22,6 +28,9 @@ class RestaurantViewModel extends BaseViewModel {
     target: LatLng(55.684341, 12.608375),
     zoom: 17,
   );
+  late IBaseCommand addToBasketCommand;
+  late IBaseCommand goToFoodDetailScreenCommand;
+  late MainViewModel mainViewModel;
 
   void changeSelectedIndex(index) {
     selectedIndex = index;
@@ -70,8 +79,10 @@ class RestaurantViewModel extends BaseViewModel {
         foodCategories.add(food.category);
       }
     }
+    addToBasketCommand = AddToBasketCommand();
+    goToFoodDetailScreenCommand = GoToFoodDetailScreenCommand();
     router = AppDiContainer.instance.appRouter;
   }
 
-  RestaurantViewModel({UpdateUi? updateUi, required this.restaurant}) : super(updateUi: updateUi);
+  RestaurantViewModel({UpdateUi? updateUi, required this.restaurant, required this.mainViewModel}) : super(updateUi: updateUi);
 }

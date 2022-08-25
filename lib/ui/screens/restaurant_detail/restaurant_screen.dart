@@ -16,7 +16,6 @@ class RestaurantScreen extends StatefulWidget {
 }
 
 class _RestaurantScreenState extends State<RestaurantScreen> {
-
   @override
   void initState() {
     widget.restaurantViewModel!.updateUi = setState;
@@ -195,6 +194,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                 children: widget.restaurantViewModel!.filteredFoods
                                     .map(
                                       (result) => InkWell(
+                                        onTap: () => widget.restaurantViewModel!.goToFoodDetailScreenCommand.doExecute({"food": result}),
                                         child: SizedBox(
                                           width: _size.width * 0.5 - 8.0,
                                           child: Padding(
@@ -286,7 +286,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                                                 Text(
                                                                   '(${result.rating.count})',
                                                                   style: UiConstraints.instance.px12w400kc4c4c4,
-                                                                )
+                                                                ),
                                                               ],
                                                             ),
                                                           ),
@@ -321,12 +321,20 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                                           height: 4.0,
                                                         ),
                                                         ElevatedButton(
-                                                          onPressed: () {},
+                                                          onPressed: () => widget.restaurantViewModel!.addToBasketCommand.doExecute({
+                                                            "fvm": widget.restaurantViewModel!.mainViewModel.basketViewModel,
+                                                            "vm": widget.restaurantViewModel,
+                                                            "product": result
+                                                          }),
                                                           style: ElevatedButton.styleFrom(
-                                                            primary: UiConstraints.instance.kfe734c,
+                                                            primary: widget.restaurantViewModel!.mainViewModel.basketViewModel!.basket.contains(result)
+                                                                ? UiConstraints.instance.k3a4f66
+                                                                : UiConstraints.instance.kfe734c,
                                                             shape: const StadiumBorder(),
                                                           ),
-                                                          child: const Text('Add'),
+                                                          child: widget.restaurantViewModel!.mainViewModel.basketViewModel!.basket.contains(result)
+                                                              ? const Text('Added')
+                                                              : const Text('Add'),
                                                         ),
                                                       ],
                                                     ),
