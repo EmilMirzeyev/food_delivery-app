@@ -1,6 +1,7 @@
 import 'package:food_delivery_app/data/models/food_model.dart';
 import 'package:food_delivery_app/ui/view_models/abstraction/i_base_viewmodel.dart';
 import 'package:food_delivery_app/ui/view_models/concrency/basket_viewmodel.dart';
+import 'package:food_delivery_app/ui/view_models/concrency/main_viemodel.dart';
 
 import '/app/commands/abstraction/i_base_command.dart';
 import '/app/helpers/enums/request_state.dart';
@@ -13,20 +14,22 @@ class AddToBasketCommand extends IBaseCommand {
 
   @override
   void execute(Map? params) async {
-    BasketViewModel _baskeViewModel = params!['fvm'];
+    BasketViewModel _basketViewModel = params!['bvm'];
+    MainViewModel _mainViewModel = params['mvm'];
     BaseViewModel _viewModel = params['vm'];
     FoodModel _product = params['product'];
     try {
-      if (_baskeViewModel.basket.contains(_product)) {
-        _baskeViewModel.basket.remove(_product);
+      if (_basketViewModel.basket.contains(_product)) {
+        _basketViewModel.basket.remove(_product);
       } else {
-        _baskeViewModel.basket.add(_product);
+        _basketViewModel.basket.add(_product);
       }
-      _baskeViewModel.getBasketRequestState = RequestState.succesfull;
+      _basketViewModel.getBasketRequestState = RequestState.succesfull;
     } catch (e) {
-      _baskeViewModel.getBasketRequestState = RequestState.unsuccesfull;
+      _basketViewModel.getBasketRequestState = RequestState.unsuccesfull;
     } finally {
-      _baskeViewModel.tryUpdateUi();
+      _basketViewModel.tryUpdateUi();
+      _mainViewModel.tryUpdateUi();
       _viewModel.tryUpdateUi();
     }
   }

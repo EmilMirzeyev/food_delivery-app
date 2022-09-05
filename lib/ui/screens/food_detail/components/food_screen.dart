@@ -84,7 +84,7 @@ class _FoodScreenState extends State<FoodScreen> {
                         style: UiConstraints.instance.px14w600kfe734c,
                       ),
                       RatingBar.builder(
-                        initialRating: vm.food.rating.rate,
+                        initialRating: vm.food.rating.rate!,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: true,
@@ -95,9 +95,7 @@ class _FoodScreenState extends State<FoodScreen> {
                           Icons.star,
                           color: Colors.amber,
                         ),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
+                        onRatingUpdate: (rating) {},
                       ),
                     ],
                   ),
@@ -176,7 +174,7 @@ class _FoodScreenState extends State<FoodScreen> {
                                 width: 16.0,
                               ),
                               Text(
-                                '\$${vm.qty! * vm.food.price}',
+                                '\$${num.parse((vm.qty! * vm.food.price).toStringAsFixed(2))}',
                                 style: UiConstraints.instance.px14w600kfe734c,
                               ),
                             ],
@@ -206,12 +204,22 @@ class _FoodScreenState extends State<FoodScreen> {
                     borderRadius: UiConstraints.instance.borderRadius,
                   ),
                   child: InkWell(
-                    onTap: () => vm.addToCart(),
+                    onTap: () {
+                      vm.addToCart();
+                      vm.addToBasketCommand.doExecute(
+                        {
+                          "product": vm.food,
+                          "mvm": vm.mainViewModel,
+                          "bvm": vm.basketViewModel,
+                          "vm": vm,
+                        },
+                      );
+                    },
                     child: SizedBox(
                       height: 38.0,
                       child: Center(
                         child: Text(
-                          "Add to cart",
+                          vm.basketViewModel.basket.contains(vm.food) ? "Added" : "Add to cart",
                           style: UiConstraints.instance.px14w600kfe734c,
                         ),
                       ),

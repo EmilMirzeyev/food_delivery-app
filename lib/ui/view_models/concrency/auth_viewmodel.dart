@@ -7,6 +7,8 @@ import '/ui/view_models/abstraction/i_base_viewmodel.dart';
 class AuthViewModel extends BaseViewModel {
   bool obscure = true;
   bool rememberme = false;
+  final String trueEmail = "iam.emilmirza@gmail.com";
+  final String truePassword = "12345678";
   AuthPageType authPageType = AuthPageType.signin;
 
   ///***************** TRANSLATE *********************

@@ -191,9 +191,9 @@ class SignInWidget extends StatelessWidget {
                       authViewModel.signup2Translate,
                       style: UiConstraints.instance.px12w600kfe734c,
                     ),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),

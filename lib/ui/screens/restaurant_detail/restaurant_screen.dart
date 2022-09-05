@@ -194,7 +194,11 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                 children: widget.restaurantViewModel!.filteredFoods
                                     .map(
                                       (result) => InkWell(
-                                        onTap: () => widget.restaurantViewModel!.goToFoodDetailScreenCommand.doExecute({"food": result}),
+                                        onTap: () => widget.restaurantViewModel!.goToFoodDetailScreenCommand.doExecute({
+                                          "food": result,
+                                          "mvm": widget.restaurantViewModel!.mainViewModel,
+                                          "bvm": widget.restaurantViewModel!.mainViewModel.basketViewModel
+                                        }),
                                         child: SizedBox(
                                           width: _size.width * 0.5 - 8.0,
                                           child: Padding(
@@ -277,7 +281,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                                               crossAxisAlignment: WrapCrossAlignment.center,
                                                               spacing: 2.0,
                                                               children: [
-                                                                Text(result.rating.rate.toStringAsFixed(1), style: UiConstraints.instance.px13w500k171718),
+                                                                Text(result.rating.rate!.toStringAsFixed(1), style: UiConstraints.instance.px13w500k171718),
                                                                 const Icon(
                                                                   Icons.star,
                                                                   size: 12.0,
@@ -322,7 +326,8 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                                         ),
                                                         ElevatedButton(
                                                           onPressed: () => widget.restaurantViewModel!.addToBasketCommand.doExecute({
-                                                            "fvm": widget.restaurantViewModel!.mainViewModel.basketViewModel,
+                                                            "bvm": widget.restaurantViewModel!.mainViewModel.basketViewModel,
+                                                            "mvm": widget.restaurantViewModel!.mainViewModel,
                                                             "vm": widget.restaurantViewModel,
                                                             "product": result
                                                           }),

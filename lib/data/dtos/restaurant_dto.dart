@@ -20,7 +20,7 @@ class WorkingTimes {
 }
 
 class Rating {
-  final dynamic rate;
+  final double? rate;
   final int? count;
 
   Rating({

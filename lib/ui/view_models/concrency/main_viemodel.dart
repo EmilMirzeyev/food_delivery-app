@@ -17,7 +17,7 @@ class MainViewModel extends BaseViewModel {
     homeViewModel = HomeViewModel(mainViewModel: this)..initialize();
     restaurantsViewModel = RestaurantsViewModel(homeViewModel: homeViewModel);
     goToBasketScreenCommand = GoToBasketScreenCommand();
-    basketViewModel = BasketViewModel()..initialize();
+    basketViewModel = BasketViewModel(mainViewModel: this)..initialize();
   }
 
   MainViewModel({UpdateUi? updateUi}) : super(updateUi: updateUi);

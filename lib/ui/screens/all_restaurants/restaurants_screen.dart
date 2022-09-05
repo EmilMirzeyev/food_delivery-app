@@ -61,7 +61,11 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                 },
                 itemBuilder: (BuildContext context, int index) {
                   final restaurant = _restaurantsViewModel.homeViewModel!.restaurants[index];
-                  return RestaurantWidget(restaurant: restaurant);
+                  return InkWell(
+                      onTap: () => _restaurantsViewModel.goToRestaurantDetailScreenCommand.doExecute(
+                            {'mvm': _restaurantsViewModel.homeViewModel!.mainViewModel, 'restaurant': restaurant},
+                          ),
+                      child: RestaurantWidget(restaurant: restaurant));
                 },
               ),
             )
@@ -71,5 +75,3 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
     );
   }
 }
-
-

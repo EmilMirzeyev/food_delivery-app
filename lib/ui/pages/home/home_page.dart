@@ -127,16 +127,22 @@ class _HomePageState extends State<HomePage> {
                   'Popular Restaurants',
                   style: UiConstraints.instance.px18w600k171718,
                 ),
-                Text(
-                  'See All (12)',
-                  style: UiConstraints.instance.px12w600kfe734c,
+                TextButton(
+                  onPressed: () => _homeViewModel.goToRestaurantsScreenCommand.doExecute({"vm": _homeViewModel.mainViewModel}),
+                  child: Text(
+                    'See All (12)',
+                    style: UiConstraints.instance.px12w600kfe734c,
+                  ),
                 ),
               ],
             ),
             const SizedBox(
               height: 12.0,
             ),
-            PopularRestaurantsWidget(viewModel: _homeViewModel),
+            PopularRestaurantsWidget(
+              viewModel: _homeViewModel,
+              goTo: (el) => _homeViewModel.goToRestaurantDetailScreenCommand.doExecute({'mvm': _homeViewModel.mainViewModel, 'restaurant': el}),
+            ),
             const SizedBox(
               height: 100.0,
             )

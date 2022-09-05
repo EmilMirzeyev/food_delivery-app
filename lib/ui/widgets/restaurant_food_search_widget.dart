@@ -249,7 +249,7 @@ class RestaurantFoodSearch extends SearchDelegate {
                                                       crossAxisAlignment: WrapCrossAlignment.center,
                                                       spacing: 2.0,
                                                       children: [
-                                                        Text(result.rating.rate.toStringAsFixed(1), style: UiConstraints.instance.px13w500k171718),
+                                                        Text(result.rating.rate!.toStringAsFixed(1), style: UiConstraints.instance.px13w500k171718),
                                                         const Icon(
                                                           Icons.star,
                                                           size: 12.0,

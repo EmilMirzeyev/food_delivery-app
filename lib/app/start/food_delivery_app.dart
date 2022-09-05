@@ -47,7 +47,7 @@ class FoodDeliveryApp extends StatelessWidget {
         MainScreen.route: (_) => const MainScreen(),
         RestaurantScreen.route: (_) => const RestaurantScreen(),
       },
-      initialRoute: MainScreen.route,
+      initialRoute: AuthScreen.route,
     );
   }
 }
